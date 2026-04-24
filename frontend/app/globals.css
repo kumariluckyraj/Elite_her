@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #2C68FF;
+  --color-brand-hover: #1B52D9;
+  --color-brand-subtle: #EEF3FF;
+  --color-ink: #1A1A1A;
+  --color-ink-soft: #333333;
+  --color-muted: #666666;
+  --color-line: #E5E5E5;
+  --color-surface: #FAFAFA;
+  --color-surface-alt: #F5F5F5;
+  --color-success: #0F9D58;
+  --color-warn: #F6A93B;
+  --color-danger: #E5484D;
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #FFFFFF;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-ticker {
+  animation: ticker-scroll 40s linear infinite;
+}
