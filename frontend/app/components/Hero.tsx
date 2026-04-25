@@ -24,7 +24,7 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 max-w-[560px] text-[17px] leading-[1.6] text-[color:var(--color-muted)]">
-            ClaimShield is an AI-powered pre-claim audit for Indian health
+            Indira is an AI-powered pre-claim audit for Indian health
             insurance. Upload your policy and hospital documents — we predict
             rejection probability, explain the reasons, and hand you a fix-it
             checklist.

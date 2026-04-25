@@ -24,11 +24,6 @@ export default function CasesClient({
   const [cases, setCases] = useState<CaseWithDocs[]>(initial);
   const [open, setOpen] = useState(false);
 
-  function onAdded(newCase: CaseWithDocs) {
-    setCases((c) => [newCase, ...c]);
-    setOpen(false);
-  }
-
   async function onDelete(id: string) {
     if (!confirm("Remove this case and all its documents?")) return;
     const res = await fetch(`/api/cases/${id}`, { method: "DELETE" });
@@ -85,7 +80,6 @@ export default function CasesClient({
         <AddCaseDrawer
           policies={policies}
           onClose={() => setOpen(false)}
-          onAdded={onAdded}
         />
       )}
     </div>
@@ -120,7 +114,10 @@ function CaseCard({
     risk === "pending" ? "Awaiting analysis" : risk.toUpperCase();
 
   return (
-    <div className="bg-white border border-[color:var(--color-line)] rounded-xl p-5 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:border-[color:var(--color-brand-subtle)] transition-all duration-300">
+    <Link
+      href={`/dashboard/cases/${item.id}`}
+      className="block bg-white border border-[color:var(--color-line)] rounded-xl p-5 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:border-[color:var(--color-brand-subtle)] transition-all duration-300"
+    >
       <div className="flex items-start justify-between mb-4">
         <span
           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase ${riskColor}`}
@@ -134,7 +131,11 @@ function CaseCard({
           {riskLabel}
         </span>
         <button
-          onClick={onDelete}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onDelete();
+          }}
           aria-label="Delete case"
           className="text-[color:var(--color-muted)] hover:text-red-600 transition-colors"
         >
@@ -191,7 +192,7 @@ function CaseCard({
         </span>
         <span>Added {created}</span>
       </div>
-    </div>
+    </Link>
   );
 }
 

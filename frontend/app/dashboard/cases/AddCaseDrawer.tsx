@@ -1,18 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { CASE_DOC_TYPES, findInsurer } from "@/lib/insurers";
-import type { CaseWithDocs, PolicyOption } from "./CasesClient";
+import type { PolicyOption } from "./CasesClient";
 
 export default function AddCaseDrawer({
   policies,
   onClose,
-  onAdded,
 }: {
   policies: PolicyOption[];
   onClose: () => void;
-  onAdded: (c: CaseWithDocs) => void;
 }) {
+  const router = useRouter();
   const [policyId, setPolicyId] = useState<string>(
     policies[0]?.id?.toString() ?? "",
   );
@@ -83,8 +83,7 @@ export default function AddCaseDrawer({
         return;
       }
       const created = data.case;
-      const policy = policies.find((p) => p.id === created.policy_id) ?? null;
-      onAdded({ ...created, policy });
+      router.push(`/dashboard/cases/${created.id}`);
     } catch {
       setError("Network error");
     } finally {

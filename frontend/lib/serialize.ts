@@ -1,5 +1,7 @@
 import type {
+  AnalysisResult,
   CaseDoc,
+  Discrepancy,
   EmbeddedDoc,
   PolicyDoc,
   UserDoc,
@@ -19,6 +21,7 @@ export type ApiEmbeddedDoc = {
   size_bytes: number;
   mime_type: string | null;
   uploaded_at: string;
+  parsed: boolean;
 };
 
 export type ApiPolicy = {
@@ -33,6 +36,17 @@ export type ApiPolicy = {
   documents: ApiEmbeddedDoc[];
 };
 
+export type ApiDiscrepancy = Discrepancy;
+
+export type ApiAnalysis = {
+  status: AnalysisResult["status"];
+  risk_score: number;
+  risk_band: AnalysisResult["risk_band"];
+  summary: string;
+  discrepancies: ApiDiscrepancy[];
+  analyzed_at: string;
+};
+
 export type ApiCase = {
   id: string;
   policy_id: string;
@@ -45,6 +59,8 @@ export type ApiCase = {
   created_at: string;
   documents: ApiEmbeddedDoc[];
   policy: { id: string; insurer: string; policy_name: string | null } | null;
+  analysis: ApiAnalysis | null;
+  comparisons: Record<string, ApiAnalysis>;
 };
 
 export function serializeUser(u: UserDoc): ApiUser {
@@ -64,6 +80,21 @@ function serializeEmbedded(d: EmbeddedDoc): ApiEmbeddedDoc {
     size_bytes: d.size_bytes,
     mime_type: d.mime_type,
     uploaded_at: d.uploaded_at.toISOString(),
+    parsed: Boolean(d.parsed_text && d.parsed_text.length > 0),
+  };
+}
+
+function serializeAnalysis(a: AnalysisResult): ApiAnalysis {
+  return {
+    status: a.status,
+    risk_score: a.risk_score,
+    risk_band: a.risk_band,
+    summary: a.summary,
+    discrepancies: a.discrepancies,
+    analyzed_at:
+      a.analyzed_at instanceof Date
+        ? a.analyzed_at.toISOString()
+        : new Date(a.analyzed_at).toISOString(),
   };
 }
 
@@ -83,7 +114,14 @@ export function serializePolicy(p: PolicyDoc): ApiPolicy {
 
 export function serializeCase(
   c: CaseDoc,
-  policy: PolicyDoc | { _id: import("mongodb").ObjectId; insurer: string; policy_name: string | null } | null,
+  policy:
+    | PolicyDoc
+    | {
+        _id: import("mongodb").ObjectId;
+        insurer: string;
+        policy_name: string | null;
+      }
+    | null,
 ): ApiCase {
   return {
     id: c._id.toHexString(),
@@ -103,5 +141,11 @@ export function serializeCase(
           policy_name: policy.policy_name,
         }
       : null,
+    analysis: c.analysis ? serializeAnalysis(c.analysis) : null,
+    comparisons: c.comparisons
+      ? Object.fromEntries(
+          Object.entries(c.comparisons).map(([k, v]) => [k, serializeAnalysis(v)]),
+        )
+      : {},
   };
 }

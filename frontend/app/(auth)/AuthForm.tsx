@@ -47,11 +47,11 @@ export default function AuthForm({ mode }: { mode: Mode }) {
       <div className="w-full max-w-md">
         <Link
           href="/"
-          className="flex items-center gap-2 mb-8 text-[color:var(--color-ink)]"
+          className="flex items-center gap-2.5 mb-8 text-[color:var(--color-ink)]"
         >
-          <ShieldMark />
-          <span className="text-[18px] font-semibold tracking-tight">
-            Claim<span className="text-[color:var(--color-brand)]">Shield</span>
+          <IndiraMark />
+          <span className="text-[20px] font-semibold tracking-[-0.01em]">
+            Indira
           </span>
         </Link>
 
@@ -62,7 +62,7 @@ export default function AuthForm({ mode }: { mode: Mode }) {
           <p className="mt-2 text-[14px] text-[color:var(--color-muted)]">
             {isSignup
               ? "Start auditing your claims in under a minute."
-              : "Sign in to your ClaimShield vault."}
+              : "Sign in to your Indira vault."}
           </p>
 
           <form onSubmit={onSubmit} className="mt-6 space-y-4">
@@ -129,7 +129,7 @@ export default function AuthForm({ mode }: { mode: Mode }) {
               </>
             ) : (
               <>
-                New to ClaimShield?{" "}
+                New to Indira?{" "}
                 <Link
                   href="/signup"
                   className="font-medium text-[color:var(--color-brand)] hover:underline"
@@ -145,20 +145,25 @@ export default function AuthForm({ mode }: { mode: Mode }) {
   );
 }
 
-function ShieldMark() {
+function IndiraMark() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M12 2L4 5v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V5l-8-3z"
-        fill="var(--color-brand)"
-      />
-      <path
-        d="M9 12l2 2 4-4"
-        stroke="#fff"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    <span
+      className="inline-flex items-center justify-center w-8 h-8 rounded-[10px] text-white text-[15px] font-bold shadow-sm"
+      style={{
+        background:
+          "linear-gradient(135deg, var(--color-brand) 0%, #1B52D9 100%)",
+      }}
+      aria-hidden
+    >
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path
+          d="M5 3h6M5 13h6M8 3v10"
+          stroke="#fff"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+        />
+        <circle cx="8" cy="8" r="1.4" fill="#fff" />
+      </svg>
+    </span>
   );
 }

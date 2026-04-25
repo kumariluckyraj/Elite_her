@@ -17,12 +17,14 @@ export default function Navbar({ userEmail }: { userEmail?: string }) {
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[color:var(--color-line)]">
       <nav className="max-w-[1280px] mx-auto flex items-center justify-between px-6 md:px-10 h-16">
-        <a href="#" className="flex items-center gap-2 text-[color:var(--color-ink)]">
-          <ShieldMark />
-          <span className="text-[17px] font-semibold tracking-tight">
-            Claim<span className="text-[color:var(--color-brand)]">Shield</span>
-          </span>
-        </a>
+        <Link
+          href="/"
+          className="flex items-center gap-2.5 group"
+          aria-label="Indira home"
+        >
+          <IndiraMark />
+          <Wordmark />
+        </Link>
 
         <ul className="hidden md:flex items-center gap-8">
           {navLinks.map((l) => (
@@ -135,20 +137,45 @@ export default function Navbar({ userEmail }: { userEmail?: string }) {
   );
 }
 
-function ShieldMark() {
+function IndiraMark() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M12 2L4 5v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V5l-8-3z"
-        fill="var(--color-brand)"
+    <span
+      className="inline-flex items-center justify-center w-8 h-8 rounded-[10px] text-white shadow-sm"
+      style={{
+        background:
+          "linear-gradient(135deg, var(--color-brand) 0%, #1B52D9 100%)",
+      }}
+      aria-hidden
+    >
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path
+          d="M5 3h6M5 13h6M8 3v10"
+          stroke="#fff"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+        />
+        <circle cx="8" cy="8" r="1.4" fill="#fff" />
+      </svg>
+    </span>
+  );
+}
+
+function Wordmark() {
+  return (
+    <span className="inline-flex items-baseline gap-1 group-hover:opacity-90 transition-opacity">
+      <span
+        className="text-[20px] font-bold tracking-[-0.035em] leading-none bg-clip-text text-transparent"
+        style={{
+          backgroundImage:
+            "linear-gradient(125deg, #1A1A1A 0%, #1A1A1A 55%, #2C68FF 100%)",
+        }}
+      >
+        ind<span className="italic">i</span>ra
+      </span>
+      <span
+        aria-hidden
+        className="w-1 h-1 rounded-full bg-[color:var(--color-brand)] mb-0.5"
       />
-      <path
-        d="M9 12l2 2 4-4"
-        stroke="#fff"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    </span>
   );
 }

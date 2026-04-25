@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from docling.document_converter import DocumentConverter
 from typing import List
 import tempfile
+import uvicorn
 
 app = FastAPI()
 
@@ -48,3 +49,6 @@ async def parse_documents(
     return {
         "documents": parsed_docs
     }
+
+if __name__ == "__main__":
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)

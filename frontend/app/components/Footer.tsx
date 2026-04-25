@@ -23,23 +23,27 @@ export default function Footer() {
       <div className="max-w-[1280px] mx-auto px-6 md:px-10 py-16 md:py-20">
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-4">
-            <div className="flex items-center gap-2 text-[color:var(--color-ink)]">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M12 2L4 5v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V5l-8-3z"
-                  fill="var(--color-brand)"
-                />
-                <path
-                  d="M9 12l2 2 4-4"
-                  stroke="#fff"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span className="text-[17px] font-semibold tracking-tight">
-                Claim
-                <span className="text-[color:var(--color-brand)]">Shield</span>
+            <div className="flex items-center gap-2.5 text-[color:var(--color-ink)]">
+              <span
+                className="inline-flex items-center justify-center w-8 h-8 rounded-[10px] text-white text-[15px] font-bold shadow-sm"
+                style={{
+                  background:
+                    "linear-gradient(135deg, var(--color-brand) 0%, #1B52D9 100%)",
+                }}
+                aria-hidden
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M5 3h6M5 13h6M8 3v10"
+                    stroke="#fff"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                  />
+                  <circle cx="8" cy="8" r="1.4" fill="#fff" />
+                </svg>
+              </span>
+              <span className="text-[19px] font-semibold tracking-[-0.01em]">
+                Indira
               </span>
             </div>
             <p className="mt-4 max-w-[320px] text-[14px] leading-[1.6] text-[color:var(--color-muted)]">
@@ -79,7 +83,7 @@ export default function Footer() {
 
         <div className="mt-14 pt-6 border-t border-[color:var(--color-line)] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <p className="text-[13px] text-[color:var(--color-muted)]">
-            © 2026 ClaimShield Technologies Pvt. Ltd. Not affiliated with any
+            © 2026 Indira Technologies Pvt. Ltd. Not affiliated with any
             insurer or IRDAI.
           </p>
           <div className="flex items-center gap-5 text-[13px] text-[color:var(--color-muted)]">

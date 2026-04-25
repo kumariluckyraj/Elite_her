@@ -12,14 +12,11 @@ import UploadInsurance from "./components/UploadInsurance";
 
 export default async function Home() {
   const user = await getCurrentUser();
-
-
-export default function Home() {
   return (
     <>
       <Navbar userEmail={user?.email} />
       <main className="flex-1">
-        <UploadInsurance />
+        {/* <UploadInsurance /> */}
         <Hero />
         <Stats />
         <HowItWorks />

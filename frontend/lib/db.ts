@@ -52,6 +52,34 @@ export type EmbeddedDoc = {
   size_bytes: number;
   mime_type: string | null;
   uploaded_at: Date;
+  parsed_text?: string;
+  parsed_at?: Date;
+};
+
+export type Discrepancy = {
+  severity: "high" | "medium" | "low";
+  category:
+    | "waiting_period"
+    | "exclusion"
+    | "sub_limit"
+    | "ped"
+    | "documentation"
+    | "room_rent"
+    | "pre_auth"
+    | "other";
+  title: string;
+  detail: string;
+  policy_clause: string | null;
+  suggested_action: string;
+};
+
+export type AnalysisResult = {
+  status: "APPROVED" | "REJECTED" | "NEEDS_REVIEW";
+  risk_score: number;
+  risk_band: "green" | "yellow" | "red";
+  summary: string;
+  discrepancies: Discrepancy[];
+  analyzed_at: Date;
 };
 
 export type PolicyDoc = {
@@ -79,6 +107,8 @@ export type CaseDoc = {
   status: string;
   created_at: Date;
   documents: EmbeddedDoc[];
+  analysis?: AnalysisResult | null;
+  comparisons?: Record<string, AnalysisResult> | null;
 };
 
 export async function users(): Promise<Collection<UserDoc>> {

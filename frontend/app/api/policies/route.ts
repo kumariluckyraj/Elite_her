@@ -3,6 +3,7 @@ import { requireUser, HttpError } from "@/lib/session";
 import { saveUpload } from "@/lib/uploads";
 import { findInsurer, POLICY_DOC_TYPES } from "@/lib/insurers";
 import { serializePolicy } from "@/lib/serialize";
+import { parseAndIndexDocs } from "@/lib/parser";
 
 export async function GET() {
   try {
@@ -82,6 +83,22 @@ export async function POST(request: Request) {
 
     const col = await policies();
     await col.insertOne(policy);
+
+    try {
+      const parsed = await parseAndIndexDocs(embedded, {
+        docType: "policy",
+        scopeId: policyId.toHexString(),
+        userId: user._id.toHexString(),
+      });
+      const updatedDocs = parsed.map((p) => p.doc);
+      policy.documents = updatedDocs;
+      await col.updateOne(
+        { _id: policyId },
+        { $set: { documents: updatedDocs } },
+      );
+    } catch (err) {
+      console.error("Policy parse/index failed:", err);
+    }
 
     return Response.json({ policy: serializePolicy(policy) }, { status: 201 });
   } catch (e) {

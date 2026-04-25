@@ -4,54 +4,154 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
-function ShieldMark() {
+function Wordmark({ size = 22 }: { size?: number }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M12 2L4 5v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V5l-8-3z"
-        fill="var(--color-brand)"
+    <span
+      className="inline-flex items-baseline gap-1 group-hover:opacity-90 transition-opacity"
+      style={{ fontSize: size, lineHeight: 1 }}
+    >
+      <span
+        className="font-bold tracking-[-0.035em] bg-clip-text text-transparent"
+        style={{
+          backgroundImage:
+            "linear-gradient(125deg, #1A1A1A 0%, #1A1A1A 55%, #2C68FF 100%)",
+        }}
+      >
+        ind<span className="italic">i</span>ra
+      </span>
+      <span
+        aria-hidden
+        className="rounded-full bg-brand"
+        style={{
+          width: Math.max(4, size * 0.18),
+          height: Math.max(4, size * 0.18),
+          alignSelf: "flex-end",
+          marginBottom: size * 0.08,
+        }}
       />
-      <path
-        d="M9 12l2 2 4-4"
-        stroke="#fff"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    </span>
+  );
+}
+
+function IndiraMark({ size = 32 }: { size?: number }) {
+  const inner = Math.round(size * 0.5);
+  return (
+    <span
+      className="inline-flex items-center justify-center rounded-[10px] text-white shadow-sm"
+      style={{
+        width: size,
+        height: size,
+        background:
+          "linear-gradient(135deg, var(--color-brand) 0%, #1B52D9 100%)",
+      }}
+      aria-hidden
+    >
+      <svg width={inner} height={inner} viewBox="0 0 16 16" fill="none">
+        <path
+          d="M5 3h6M5 13h6M8 3v10"
+          stroke="#fff"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+        />
+        <circle cx="8" cy="8" r="1.4" fill="#fff" />
+      </svg>
+    </span>
   );
 }
 
 function PoliciesIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-      <polyline points="14 2 14 8 20 8"></polyline>
-      <line x1="16" y1="13" x2="8" y2="13"></line>
-      <line x1="16" y1="17" x2="8" y2="17"></line>
-      <polyline points="10 9 9 9 8 9"></polyline>
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+      <line x1="16" y1="13" x2="8" y2="13" />
+      <line x1="16" y1="17" x2="8" y2="17" />
+      <polyline points="10 9 9 9 8 9" />
     </svg>
   );
 }
 
 function CasesIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-      <line x1="16" y1="2" x2="16" y2="6"></line>
-      <line x1="8" y1="2" x2="8" y2="6"></line>
-      <line x1="3" y1="10" x2="21" y2="10"></line>
-      <rect x="8" y="14" width="8" height="4" rx="1"></rect>
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+      <line x1="16" y1="2" x2="16" y2="6" />
+      <line x1="8" y1="2" x2="8" y2="6" />
+      <line x1="3" y1="10" x2="21" y2="10" />
+      <rect x="8" y="14" width="8" height="4" rx="1" />
+    </svg>
+  );
+}
+
+function CompareIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 3v18" />
+      <path d="M5 7h4l-3 6h6l-3-6" />
+      <path d="M15 7h4l-3 6h6l-3-6" />
+      <path d="M5 21h14" />
+    </svg>
+  );
+}
+
+function ReportsIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 3v18h18" />
+      <path d="M7 14l3-3 3 3 5-5" />
+      <circle cx="7" cy="14" r="1.5" fill="currentColor" stroke="none" />
+      <circle cx="13" cy="14" r="1.5" fill="currentColor" stroke="none" />
+      <circle cx="18" cy="9" r="1.5" fill="currentColor" stroke="none" />
     </svg>
   );
 }
 
 function LogOutIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-      <polyline points="16 17 21 12 16 7"></polyline>
-      <line x1="21" y1="12" x2="9" y2="12"></line>
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+      <polyline points="16 17 21 12 16 7" />
+      <line x1="21" y1="12" x2="9" y2="12" />
     </svg>
   );
 }
@@ -59,6 +159,8 @@ function LogOutIcon({ className }: { className?: string }) {
 const tabs = [
   { href: "/dashboard/policies", label: "Policies", icon: PoliciesIcon },
   { href: "/dashboard/cases", label: "Cases", icon: CasesIcon },
+  { href: "/dashboard/reports", label: "Reports", icon: ReportsIcon },
+  { href: "/dashboard/compare", label: "Compare", icon: CompareIcon },
 ];
 
 export default function DashboardNav({ email }: { email: string }) {
@@ -74,73 +176,125 @@ export default function DashboardNav({ email }: { email: string }) {
 
   return (
     <>
-      {/* Mobile Top Header */}
-      <div className="md:hidden flex items-center justify-between bg-white border-b border-[color:var(--color-line)] px-6 h-16 shrink-0">
-        <Link href="/dashboard/policies" className="flex items-center gap-2 text-[color:var(--color-ink)]">
-          <ShieldMark />
-          <span className="text-[17px] font-semibold tracking-tight">
-            Claim<span className="text-[color:var(--color-brand)]">Shield</span>
-          </span>
+      {/* Mobile top header */}
+      <div className="md:hidden flex items-center justify-between bg-white border-b border-line px-5 h-16 shrink-0">
+        <Link
+          href="/"
+          className="flex items-center gap-2.5 group"
+          aria-label="Indira home"
+        >
+          <IndiraMark size={28} />
+          <Wordmark size={18} />
         </Link>
-        <button onClick={() => setMenuOpen((v) => !v)} className="p-2 flex flex-col gap-1.5">
-          <span className="block h-0.5 w-6 bg-[color:var(--color-ink)]" />
-          <span className="block h-0.5 w-6 bg-[color:var(--color-ink)]" />
-          <span className="block h-0.5 w-6 bg-[color:var(--color-ink)]" />
+        <button
+          onClick={() => setMenuOpen((v) => !v)}
+          className="p-2 flex flex-col gap-1.5"
+          aria-label="Toggle menu"
+        >
+          <span className="block h-0.5 w-6 bg-ink" />
+          <span className="block h-0.5 w-6 bg-ink" />
+          <span className="block h-0.5 w-6 bg-ink" />
         </button>
       </div>
 
-      {/* Sidebar Desktop & Mobile Menu */}
-      <aside className={`
-        ${menuOpen ? "block" : "hidden"} 
-        md:flex flex-col w-full md:w-64 bg-white border-r border-[color:var(--color-line)] md:h-screen shrink-0 z-40
-      `}>
-        <div className="hidden md:flex p-6 h-16 shrink-0 border-b border-[color:var(--color-line)]">
-          <Link href="/dashboard/policies" className="flex items-center gap-2 text-[color:var(--color-ink)]">
-            <ShieldMark />
-            <span className="text-[17px] font-semibold tracking-tight">
-              Claim<span className="text-[color:var(--color-brand)]">Shield</span>
-            </span>
+      {/* Sidebar (mobile sheet + desktop) */}
+      <aside
+        className={`
+          ${menuOpen ? "block" : "hidden"}
+          md:flex flex-col w-full md:w-[260px] shrink-0 z-40
+          bg-gradient-to-b from-white to-[#FAFBFD]
+          border-r border-line md:h-screen
+        `}
+      >
+        {/* Brand header */}
+        <div className="hidden md:flex items-center px-6 h-[72px] shrink-0 border-b border-line">
+          <Link
+            href="/"
+            className="flex items-center gap-3 group"
+            aria-label="Indira home"
+          >
+            <IndiraMark size={34} />
+            <div className="flex flex-col leading-none">
+              <Wordmark size={22} />
+              <span className="mt-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-muted">
+                Claim · Audit · Appeal
+              </span>
+            </div>
           </Link>
         </div>
 
-        <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+        {/* Section eyebrow */}
+        <div className="px-6 pt-6 pb-2 hidden md:block">
+          <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-muted">
+            Workspace
+          </span>
+        </div>
+
+        <nav className="flex-1 px-3 md:px-3 pb-4 space-y-0.5 overflow-y-auto">
           {tabs.map((t) => {
-            const active = pathname.startsWith(t.href);
+            const active =
+              t.href === "/dashboard/policies"
+                ? pathname === t.href ||
+                  pathname.startsWith("/dashboard/policies/")
+                : pathname.startsWith(t.href);
             const Icon = t.icon;
             return (
               <Link
                 key={t.href}
                 href={t.href}
                 onClick={() => setMenuOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-medium transition-all duration-200 ${
+                className={`relative flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-[14px] font-medium transition-all duration-150 ${
                   active
-                    ? "bg-[color:var(--color-brand-subtle)] text-[color:var(--color-brand)] shadow-sm"
-                    : "text-[color:var(--color-muted)] hover:bg-[color:var(--color-surface)] hover:text-[color:var(--color-ink)]"
+                    ? "bg-brand-subtle text-brand"
+                    : "text-muted hover:bg-surface hover:text-ink"
                 }`}
               >
-                <Icon className={`w-[18px] h-[18px] ${active ? "text-[color:var(--color-brand)]" : "text-[color:var(--color-muted)]"}`} />
-                {t.label}
+                {active && (
+                  <span
+                    aria-hidden
+                    className="absolute left-0 top-2 bottom-2 w-[3px] rounded-r bg-brand"
+                  />
+                )}
+                <Icon
+                  className={`w-[18px] h-[18px] ${
+                    active ? "text-brand" : "text-muted"
+                  }`}
+                />
+                <span className="flex-1">{t.label}</span>
               </Link>
             );
           })}
         </nav>
 
-        <div className="p-4 border-t border-[color:var(--color-line)] shrink-0">
-          <div className="flex items-center gap-3 px-2 py-3 mb-2">
-            <span className="w-8 h-8 shrink-0 rounded-full bg-[color:var(--color-brand-subtle)] text-[color:var(--color-brand)] flex items-center justify-center text-[13px] font-semibold shadow-sm">
+        {/* User card */}
+        <div className="p-3 border-t border-line shrink-0">
+          <div className="flex items-center gap-3 px-3 py-3 rounded-xl bg-white border border-line">
+            <span
+              className="w-9 h-9 shrink-0 rounded-full flex items-center justify-center text-white text-[13px] font-bold"
+              style={{
+                background:
+                  "linear-gradient(135deg, var(--color-brand) 0%, #1B52D9 100%)",
+              }}
+            >
               {email[0]?.toUpperCase()}
             </span>
-            <span className="truncate text-[14px] font-medium text-[color:var(--color-ink)]">
-              {email}
-            </span>
+            <div className="min-w-0 flex-1">
+              <div className="text-[10px] font-bold uppercase tracking-[0.1em] text-muted leading-none mb-1">
+                Signed in
+              </div>
+              <div className="truncate text-[13px] font-medium text-ink">
+                {email}
+              </div>
+            </div>
+            <button
+              onClick={logout}
+              aria-label="Sign out"
+              title="Sign out"
+              className="w-8 h-8 shrink-0 inline-flex items-center justify-center text-muted hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+            >
+              <LogOutIcon className="w-[16px] h-[16px]" />
+            </button>
           </div>
-          <button
-            onClick={logout}
-            className="w-full flex items-center gap-3 px-4 py-2.5 text-[14px] font-medium text-red-600 hover:bg-red-50 rounded-xl transition-colors"
-          >
-            <LogOutIcon className="w-[18px] h-[18px]" />
-            Sign out
-          </button>
         </div>
       </aside>
     </>
