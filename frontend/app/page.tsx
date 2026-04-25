@@ -7,12 +7,13 @@ import InsurerBenchmark from "./components/InsurerBenchmark";
 import Pricing from "./components/Pricing";
 import CTABlock from "./components/CTABlock";
 import Footer from "./components/Footer";
-
+import UploadInsurance from "./components/UploadInsurance";
 export default function Home() {
   return (
     <>
       <Navbar />
       <main className="flex-1">
+        <UploadInsurance />
         <Hero />
         <Stats />
         <HowItWorks />
