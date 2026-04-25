@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const navLinks = [
   { label: "How it works", href: "#how" },
@@ -9,7 +10,8 @@ const navLinks = [
   { label: "Pricing", href: "#pricing" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ userEmail }: { userEmail?: string }) {
+
   const [open, setOpen] = useState(false);
 
   return (
@@ -35,20 +37,35 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden md:flex items-center gap-3">
-          <a
-            href="#"
-            className="text-[14px] font-medium text-[color:var(--color-ink)] hover:text-[color:var(--color-brand)] transition-colors"
-          >
-            Sign in
-          </a>
-          <a
-            href="#hero-cta"
+        <div className="hidden md:flex items-center gap-6">
+          {userEmail ? (
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-2 text-[14px] font-medium hover:text-[color:var(--color-brand)] transition-colors"
+            >
+              <span className="w-8 h-8 rounded-full bg-[color:var(--color-brand-subtle)] text-[color:var(--color-brand)] flex items-center justify-center text-[13px] font-semibold">
+                {userEmail[0]?.toUpperCase()}
+              </span>
+              <span className="truncate max-w-[160px] text-[color:var(--color-ink)]">
+                {userEmail}
+              </span>
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              className="text-[14px] font-medium text-[color:var(--color-ink)] hover:text-[color:var(--color-brand)] transition-colors"
+            >
+              Sign in
+            </Link>
+          )}
+          <Link
+            href="/signup"
             className="inline-flex items-center rounded-lg bg-[color:var(--color-brand)] px-4 py-2 text-[14px] font-semibold text-white transition-colors hover:bg-[color:var(--color-brand-hover)]"
           >
             Audit my claim
-          </a>
+          </Link>
         </div>
+
 
         <button
           aria-label="Toggle menu"
@@ -75,15 +92,42 @@ export default function Navbar() {
                 </a>
               </li>
             ))}
+            {userEmail ? (
+              <li className="py-2 border-b border-[color:var(--color-line)] mb-2">
+                <Link
+                  href="/dashboard"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-3"
+                >
+                  <span className="w-8 h-8 rounded-full bg-[color:var(--color-brand-subtle)] text-[color:var(--color-brand)] flex items-center justify-center text-[13px] font-semibold">
+                    {userEmail[0]?.toUpperCase()}
+                  </span>
+                  <span className="text-[15px] font-medium text-[color:var(--color-ink)] truncate">
+                    {userEmail}
+                  </span>
+                </Link>
+              </li>
+            ) : (
+              <li>
+                <Link
+                  href="/login"
+                  onClick={() => setOpen(false)}
+                  className="block py-2 text-[15px] font-medium text-[color:var(--color-ink)]"
+                >
+                  Sign in
+                </Link>
+              </li>
+            )}
             <li>
-              <a
-                href="#hero-cta"
+              <Link
+                href="/signup"
                 onClick={() => setOpen(false)}
                 className="mt-2 inline-flex w-full justify-center items-center rounded-lg bg-[color:var(--color-brand)] px-4 py-2.5 text-[14px] font-semibold text-white"
               >
                 Audit my claim
-              </a>
+              </Link>
             </li>
+
           </ul>
         </div>
       )}
